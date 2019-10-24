@@ -1,6 +1,5 @@
 import React from 'react';
-import {useStyles} from './Style';
-
+import {useStyles} from '../App';
 
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
@@ -15,10 +14,14 @@ const giveThumbUp = () =>{
 
 }
 
-const QueueItem = ({ track }) => (
+const QueueItem = ({ track }) => {
+  const classes = useStyles();
+
+  return(
+
   <ListItem>
   <ListItemText
-          primary={track.title}
+          primary={track.name}
           secondary={
             <React.Fragment>
               <Typography
@@ -26,19 +29,19 @@ const QueueItem = ({ track }) => (
                 variant="body2"
                 color="textPrimary"
               >
-              {track.artist}   •
+              {track.artists[0].name}   •
               </Typography>
-              •   {track.album}
+              •   {track.album.name}
             </React.Fragment>
           }
         />
   <ListItemSecondaryAction>
-      <IconButton aria-label="Give a thumb up" onClick={() => giveThumbUp()}>
+      <IconButton  className={classes.button} aria-label="Give a thumb up" onClick={() => giveThumbUp()}>
         <ThumbUpIcon />
       </IconButton>
     </ListItemSecondaryAction>
-  </ListItem>
-);
+  </ListItem>)
+};
 
 
 export default QueueItem;
